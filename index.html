@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo Canvas</title>
+    <style>
+        #canvas {
+            border: solid 1px black;
+        }
+    </style>
+    <script>
+        var angulo = 0;
+        var time = 0;
+        function dibujar() {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+
+            var x = 150 * Math.sin(angulo);
+            var y = 150 * Math.cos(angulo);
+
+            canvas.width = canvas.width
+
+            ctx.moveTo(x + 250, y + 250);
+            ctx.lineTo(-x + 250, -y + 250);
+            ctx.stroke();
+            angulo += Math.PI * 0.005;
+
+            time = setTimeout(dibujar, 33);
+        }
+
+
+    </script>
+</head>
+<body>
+<h1>Ejemplo canvas</h1>
+<canvas id="canvas" width="500" height="500"></canvas>
+<button onclick="dibujar()">Dibujar</button>
+</body>
+</html>
