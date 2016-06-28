@@ -4,36 +4,61 @@
     <meta charset="UTF-8">
     <title>Ejemplo Canvas</title>
     <style>
-        #canvas {
+        #lienzo {
             border: solid 1px black;
+            margin: 0 auto;
         }
     </style>
     <script>
         var angulo = 0;
         var time = 0;
         function dibujar() {
-            var canvas = document.getElementById("canvas");
+        
+            // Obtengo el objeto canvas de la pagina por el ID lienzo
+            var canvas = document.getElementById("lienzo");
+            // del objeto canvas pido el contexto para poder utilizar sus funciones de dibujo
             var ctx = canvas.getContext("2d");
 
+            // Hago calculos particulares para lo que deseo dibujar
             var x = 150 * Math.sin(angulo);
             var y = 150 * Math.cos(angulo);
 
+            // Haciendo el ancho igual al ancho se limpia el canvas
             canvas.width = canvas.width
 
+            // Muevo el cursor a la posicion X Y desde donde voy a hacer la conversion
             ctx.moveTo(x + 250, y + 250);
+            
+            // Digo hasta donde hacer una linea
             ctx.lineTo(-x + 250, -y + 250);
+            
+            // Marco la linea (realmente la dibujo)
             ctx.stroke();
+            
+            // actualizo el angulo para el proxima vez que dibuje
             angulo += Math.PI * 0.005;
 
-            time = setTimeout(dibujar, 33);
+        }
+        
+        // Funcion llamada por el boton para hacer la animación.
+        function animar(){
+            // El set interval ejecuta cada 33ms la función dibujar que escribimos arriba
+            time = setInterval(dibujar, 33);
+        
         }
 
+        // Funcion llamada por el boton detener
+        function detener_animar(){
+            // Con clear interval hago que se deje de ejecutar cada 33ms la funcion dibujar.
+            clearInterval(time);
+        
+        }
 
     </script>
 </head>
 <body>
 <h1>Ejemplo canvas</h1>
-<canvas id="canvas" width="500" height="500"></canvas>
-<button onclick="dibujar()">Dibujar</button>
+<button onclick="animar()">Animar</button><button onclick="detener_animar()">Detener</button><br>
+<canvas id="lienzo" width="500" height="500"></canvas>
 </body>
 </html>
